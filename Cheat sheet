@@ -1,0 +1,275 @@
+open vm
+settings network NAT
+Advanced option ok
+start machine.
+
+
+In VS code-command prompt-type
+Remote-ssh- connect to host - add new ssh host
+ssh -p 2222 airflow@local
+select first line config file
+password is airflow
+
+
+Python ENV
+
+python3 -m venv sandbox
+source sandbox/bin/activate
+pip install wheel
+pip install apache-airflow==2.1.0 --constraint copypaste github link marclimberti/airflow.rite
+
+airflow db init 
+ls
+cd airflow
+ls
+airflow webserver
+airflow -h
+
+
+Goto vs code -select folder airflow-local default files will be available.
+create dags folder 
+mkdir dags
+inside dags create new file user_processing.py
+and write code to create pipeline.
+
+
+How to create users in airflow:
+airflow users -h
+airflow users create -h
+airflow users crrate -u admin -p admin -f niks -l lokhande -r admin -e admin@airflow.com
+airflow webserver -open browser
+username password & sign.
+
+
+
+
+other commands :-
+airflow db init
+airflow db upgrade
+airflow db reset....(everything is deleted)
+airflow webserver
+airflow scheduler
+airflow dag list
+airflow tasks list example_xcom_args
+
+output :- generate_value
+          print_value
+
+Note:- This output is very important otherwise you will gwt an error in datapipeline.
+
+airflow dags trigger -e 2020-01-01 example_xcom_args
+
+
+after Scheduler check tree view graph view, gantt view(time taken to execute the task)
+
+
+Before going to create data pipeline
+
+create dag folder
+mkdir dags
+new file - user_processing.py
+write a code for data pipeline
+create table----is API available to fetch users(HTTP Sensor)----Extracting users---Processing user using python----storing user (bash operator)
+
+
+How to start VM:
+
+open vm 
+open vs code
+in command pallet type remote-ssh
+local host -airflow(password)
+
+pip install apache-airflow-providers-sqlite
+in airflow browser
+got o admin-connections click on
+connect_id=db_sqlite
+sqlite
+SQLite conn to DB.
+
+Host 
+ls pwd
+
+
+after writing code in vs code
+
+airflow tasks test user_processing creating_table 2020-01-01
+sqlite3 airflow.db
+ls
+SELECT * FROM users;
+
+(crtl+d) to exit sqlite interpreter.
+
+
+Operators for data pipeline
+
+Task1 - creating table - sqliteopeartor
+Task2 -is api available -HTTP Sensor
+Task3 - Extracting_user -HTTP opeartoe to fetch the user
+Task4-Processing_user -python operator
+Task5-Storing user - Bash Operator
+
+
+How to configure airflow for executing multiple task
+
+task1 >>[task2,task3]>>task4
+
+Starts scaling with local executor
+install postgres
+install postgres extract package
+sql_alchemy_conn=postgresql+psycopg2://postgres:postgres@localhost/postgres
+
+
+Local executor is used for running multiple tasks.
+Sequential Executor is used for single task.
+Celery Executor used on infinte tasks.
+
+
+pip install 'apache-airflow[celery]
+sudo apt install redis-server....
+
+dag_concurrency=16
+only 16 tasks executes at a time.
+
+parallism=32
+it gives no.of allowed processes,and executes tasks  in parallel.
+
+
+For complex data pipelines
+
+Tasksgroup
+from airflow.utils.tasks-group import TaskGroup
+
+Exchange data between the tasks
+
+xcoms=64kb
+
+9 triggers rule:
+one -success
+one-failed
+none-failed
+one failed one skipped.
+
+
+Elastic search installation
+
+curl -x GET "http:// localhost:9200"
+
+
+Docker
+docker-compose -f docker-compose.yaml.up -d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
